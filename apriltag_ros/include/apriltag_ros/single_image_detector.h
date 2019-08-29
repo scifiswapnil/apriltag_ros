@@ -55,7 +55,7 @@ class SingleImageDetector
  private:
   TagDetector tag_detector_;
   ros::ServiceServer single_image_analysis_service_;
-
+  ros::Publisher tag_center_publisher_;
   ros::Publisher tag_detections_publisher_;
   
  public:

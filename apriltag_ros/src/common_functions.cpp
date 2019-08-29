@@ -498,7 +498,7 @@ geometry_msgs::PoseWithCovarianceStamped TagDetector::makeTagPose(
   return pose;
 }
 
-void TagDetector::drawDetections (cv_bridge::CvImagePtr image)
+void TagDetector::drawDetections (cv_bridge::CvImagePtr image, ros::Publisher tag_image_data)
 {
   for (int i = 0; i < zarray_size(detections_); i++)
   {
@@ -558,6 +558,13 @@ void TagDetector::drawDetections (cv_bridge::CvImagePtr image)
                 cv::Point((int)(det->c[0]-textsize.width/2),
                           (int)(det->c[1]+textsize.height/2)),
                 fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
+    geometry_msgs::Point temp;
+    cv::Point tempPt;
+    tempPt = cv::Point((int)(det->c[0]),(int)(det->c[1]));
+    temp.x = tempPt.x;
+    temp.y = tempPt.y;
+    temp.z = det->id;
+    tag_image_data.publish(temp);
   }
 }
 

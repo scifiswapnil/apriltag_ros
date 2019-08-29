@@ -85,7 +85,7 @@ bool SingleImageDetector::analyzeImage(
   tag_detections_publisher_.publish(response.tag_detections);
 
   // Save tag detections image
-  tag_detector_.drawDetections(loaded_image);
+  tag_detector_.drawDetections(loaded_image,tag_center_publisher_);
   cv::imwrite(request.full_path_where_to_save_image, loaded_image->image);
 
   ROS_INFO("Done!\n");

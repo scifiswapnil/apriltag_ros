@@ -69,6 +69,7 @@ class ContinuousDetector: public nodelet::Nodelet
   std::shared_ptr<image_transport::ImageTransport> it_;
   image_transport::CameraSubscriber camera_image_subscriber_;
   image_transport::Publisher tag_detections_image_publisher_;
+  ros::Publisher tag_center_publisher_;
   ros::Publisher tag_detections_publisher_;
 };
 

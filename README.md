@@ -1,3 +1,11 @@
+# apriltag_ros opencv image from coordinate
+
+This is an extended version of [AprilTag ROS Wrapper](https://github.com/AprilRobotics/apriltag_ros). 
+
+### update 
+
+- Added opencv image frame coodinate publisher for tags. (For use of cropping image in based on a set of marker. In progress.!)
+
 # apriltag_ros
 
 `apriltag_ros` is a Robot Operating System (ROS) wrapper of the [AprilTag 3 visual fiducial detector](https://april.eecs.umich.edu/software/apriltag.html). For details and tutorials, please see the [ROS wiki](http://wiki.ros.org/apriltag_ros).
@@ -43,20 +51,19 @@ The source code in `apriltag_ros/` is original code that is the ROS wrapper itse
 
 If you use this code, please kindly cite:
 
-- D. Malyuta, C. Brommer, D. Hentzen, T. Stastny, R. Siegwart, and R. Brockers, “[Long-duration fully autonomous operation of rotorcraft unmanned aerial systems for remote-sensing data acquisition](https://onlinelibrary.wiley.com/doi/abs/10.1002/rob.21898),” Journal of Field Robotics, p. arXiv:1908.06381, Aug. 2019.
+- D. Malyuta, “[Navigation, Control and Mission Logic for Quadrotor Full-cycle Autonomy](https://www.research-collection.ethz.ch/handle/20.500.11850/248154),” Master thesis, Jet Propulsion Laboratory, 4800 Oak Grove Drive, Pasadena, CA 91109, USA, December 2017.
 - J. Wang and E. Olson, "[AprilTag 2: Efficient and robust fiducial detection](http://ieeexplore.ieee.org/document/7759617/)," in ''Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)'', October 2016.
 
 ```
-@article{Malyuta2019,
-  doi = {10.1002/rob.21898},
-  url = {https://doi.org/10.1002/rob.21898},
-  pages = {arXiv:1908.06381},
-  year = {2019},
-  month = aug,
-  publisher = {Wiley},
-  author = {Danylo Malyuta and Christian Brommer and Daniel Hentzen and Thomas Stastny and Roland Siegwart and Roland Brockers},
-  title = {Long-duration fully autonomous operation of rotorcraft unmanned aerial systems for remote-sensing data acquisition},
-  journal = {Journal of Field Robotics}
+@mastersthesis{malyuta:2017mt,
+  author = {Danylo Malyuta},
+  title = {{Guidance, Navigation, Control and Mission Logic for Quadrotor Full-cycle Autonomy}},
+  language = {english},
+  type = {Master thesis},
+  school = {Jet Propulsion Laboratory},
+  address = {4800 Oak Grove Drive, Pasadena, CA 91109, USA},
+  month = dec,
+  year = {2017}
 }
 @inproceedings{Wang2016,
   author = {Wang, John and Olson, Edwin},

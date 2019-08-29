@@ -61,7 +61,7 @@
 #include <image_transport/image_transport.h>
 #include <sensor_msgs/image_encodings.h>
 #include <tf/transform_broadcaster.h>
-
+#include <geometry_msgs/Point.h>
 #include <apriltag.h>
 
 #include "apriltag_ros/AprilTagDetection.h"
@@ -231,7 +231,8 @@ class TagDetector
                        std::vector<cv::Point3d >& objectPoints) const;
 
   // Draw the detected tags' outlines and payload values on the image
-  void drawDetections(cv_bridge::CvImagePtr image);
+  // void drawDetections(cv_bridge::CvImagePtr image);
+  void drawDetections (cv_bridge::CvImagePtr image, ros::Publisher tag_image_data);
 };
 
 } // namespace apriltag_ros
