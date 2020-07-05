@@ -425,6 +425,10 @@ void TagDetector::addObjectPoints (
 {
   // Add to object point vector the tag corner coordinates in the bundle frame
   // Going counterclockwise starting from the bottom left corner
+  // std::cout << T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d(-s,-s, 0, 1) << std::endl; 
+  // std::cout << T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d( s,-s, 0, 1) << std::endl; 
+  // std::cout << T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d( s, s, 0, 1) << std::endl; 
+  // std::cout << T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d(-s, s, 0, 1) << std::endl; 
   objectPoints.push_back(T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d(-s,-s, 0, 1));
   objectPoints.push_back(T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d( s,-s, 0, 1));
   objectPoints.push_back(T_oi.get_minor<3, 4>(0, 0)*cv::Vec4d( s, s, 0, 1));
@@ -537,13 +541,13 @@ void TagDetector::drawDetections (cv_bridge::CvImagePtr image, ros::Publisher ta
          cv::Scalar(0, 0xff, 0)); // green
     line(image->image, cv::Point((int)det->p[0][0], (int)det->p[0][1]),
          cv::Point((int)det->p[3][0], (int)det->p[3][1]),
-         cv::Scalar(0, 0, 0xff)); // red
+         cv::Scalar(0, 0, 0xff)); // blue
     line(image->image, cv::Point((int)det->p[1][0], (int)det->p[1][1]),
          cv::Point((int)det->p[2][0], (int)det->p[2][1]),
-         cv::Scalar(0xff, 0, 0)); // blue
+         cv::Scalar(0xff, 0, 0)); // red
     line(image->image, cv::Point((int)det->p[2][0], (int)det->p[2][1]),
          cv::Point((int)det->p[3][0], (int)det->p[3][1]),
-         cv::Scalar(0xff, 0, 0)); // blue
+         cv::Scalar(0, 0, 0)); // red
 
     // Print tag ID in the middle of the tag
     std::stringstream ss;
@@ -554,16 +558,38 @@ void TagDetector::drawDetections (cv_bridge::CvImagePtr image, ros::Publisher ta
     int baseline;
     cv::Size textsize = cv::getTextSize(text, fontface,
                                         fontscale, 2, &baseline);
+    cv::putText(image->image, "+1", // center
+                cv::Point((int)det->p[0][0], (int)det->p[0][1]),
+                fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
+    cv::putText(image->image, "+2",
+                cv::Point((int)det->p[1][0], (int)det->p[1][1]),
+                fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
+    cv::putText(image->image, "+3",
+                cv::Point((int)det->p[2][0], (int)det->p[2][1]),
+                fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
+    cv::putText(image->image, "+4",
+                cv::Point((int)det->p[3][0], (int)det->p[3][1]),
+                fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
     cv::putText(image->image, text,
                 cv::Point((int)(det->c[0]-textsize.width/2),
                           (int)(det->c[1]+textsize.height/2)),
                 fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
-    geometry_msgs::Point temp;
-    cv::Point tempPt;
-    tempPt = cv::Point((int)(det->c[0]),(int)(det->c[1]));
-    temp.x = tempPt.x;
-    temp.y = tempPt.y;
-    temp.z = det->id;
+    apriltag_ros::TagImageCorner temp;
+    temp.points.clear();
+    cv::Point tempPt = cv::Point((int)(det->c[0]),(int)(det->c[1]));
+    geometry_msgs::Point tempgp;
+    tempgp.x = tempPt.x;
+    tempgp.y = tempPt.y;
+    tempgp.z = 0.0;
+    temp.points.push_back(tempgp);
+    for (size_t i = 0; i < 4; i++)
+    {
+      tempPt=cv::Point((int)det->p[i][0], (int)det->p[i][1]);
+      tempgp.x = tempPt.x;
+      tempgp.y = tempPt.y;
+      tempgp.z = 0.0;
+      temp.points.push_back(tempgp);
+    }
     tag_image_data.publish(temp);
   }
 }

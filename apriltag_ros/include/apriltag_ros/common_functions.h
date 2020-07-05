@@ -66,6 +66,7 @@
 
 #include "apriltag_ros/AprilTagDetection.h"
 #include "apriltag_ros/AprilTagDetectionArray.h"
+#include "apriltag_ros/TagImageCorner.h"
 
 namespace apriltag_ros
 {

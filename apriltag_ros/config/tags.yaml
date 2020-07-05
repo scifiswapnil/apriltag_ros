@@ -19,8 +19,8 @@
 #   ]
 standalone_tags:
   [
-    {id: 1, size: 0.063, name: goal_marker},
-    {id: 0, size: 0.063, name: base_link},
+    {id: 1, size: 0.03, name: goal_marker},
+    {id: 0, size: 0.03, name: base_link},
   ]
 # ## Tag bundle definitions
 # ### Remarks

@@ -50,6 +50,7 @@ add_message_files(
   FILES
   AprilTagDetection.msg
   AprilTagDetectionArray.msg
+  TagImageCorner.msg
 )
 
 add_service_files(

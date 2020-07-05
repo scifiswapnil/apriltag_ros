@@ -58,7 +58,7 @@ void ContinuousDetector::onInit ()
                           &ContinuousDetector::imageCallback, this);
   tag_detections_publisher_ =
       nh.advertise<AprilTagDetectionArray>("tag_detections", 1);
-  tag_center_publisher_ = nh.advertise<geometry_msgs::Point>("tag_center_image_point",1);
+  tag_center_publisher_ = nh.advertise<apriltag_ros::TagImageCorner>("tag_center_image_point",1);
   if (draw_tag_detections_image_)
   {
     tag_detections_image_publisher_ = it_->advertise("tag_detections_image", 1);
